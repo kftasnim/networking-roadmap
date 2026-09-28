@@ -40,30 +40,50 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { 
         getFirestore, 
-        collection, 
-        addDoc, 
-        getDocs, 
+        doc, 
+        setDoc, 
         onSnapshot 
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    // Firebase configuration (Apnar Firebase console-er project settings theke credentials scroll kora)
+    // Apnar dynamic API config
     const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_APP_ID"
+        apiKey: "AIzaSyAvHRiw_fSBvYR0hkBMUDdHfnA_7tq33hE",
+        authDomain: "networking-tracker-3c26a.firebaseapp.com",
+        projectId: "networking-tracker-3c26a",
+        storageBucket: "networking-tracker-3c26a.firebasestorage.app",
+        messagingSenderId: "180916860908",
+        appId: "1:180916860908:web:a2944e3a89d3eb270832c9"
     };
 
-    // Initialize Firebase
+    // Firebase & Firestore Initializing
     const app = initializeApp(firebaseConfig);
-    
-    // Initialize Firestore Database
     const db = getFirestore(app);
 
-    // Dynamic export to global scope if needed
-    window.db = db;
+    // Single document reference for state
+    const userDocRef = doc(db, "networking_tracker", "user_progress");
+
+    // Realtime Listener to load data
+    onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+            window.userState = docSnap.data();
+            if (typeof window.renderRoadmap === 'function') window.renderRoadmap();
+            if (typeof window.updateMetrics === 'function') window.updateMetrics();
+            if (typeof window.renderAllNotesSummary === 'function') window.renderAllNotesSummary();
+        }
+    }, (error) => {
+        console.error("Firestore sync error:", error);
+    });
+
+    // Save state directly to Firestore
+    window.saveState = async function() {
+        try {
+            await setDoc(userDocRef, window.userState);
+            if (typeof window.updateMetrics === 'function') window.updateMetrics();
+            if (typeof window.renderAllNotesSummary === 'function') window.renderAllNotesSummary();
+        } catch (e) {
+            console.error("Error saving to Firestore: ", e);
+        }
+    };
 </script>
     <style>
         body {
