@@ -36,6 +36,24 @@
             }
         }
     </script>
+    <!-- Firebase Modular SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvHRiw_fSBvYR0hkBMUDdHfnA_7tq33hE",
+            authDomain: "networking-tracker-3c26a.firebaseapp.com",
+            projectId: "networking-tracker-3c26a",
+            storageBucket: "networking-tracker-3c26a.firebasestorage.app",
+            messagingSenderId: "180916860908",
+            appId: "1:180916860908:web:a2944e3a89d3eb270832c9"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
     <style>
         body {
             background-color: #0d1117;
@@ -466,298 +484,307 @@
                         title: "3.1 Static Routing & Administrative Distance",
                         desc: "Static Routes, Default Routes (0.0.0.0/0), Floating Static Routes, AD Values.",
                         topics: [
-                            { id: "t-3-1-1", title: "Administrative Distance & Longest Prefix Match Rule", details: "How routers select the best path from the routing table." },
-                            { id: "t-3-1-2", title: "Floating Static Routes for Backup Links", details: "Configure higher AD static routes for automated failover." }
+                            { id: "t-3-1-1", title: "Longest Match Rule & Administrative Distance Hierarchy", details: "Learn routing decision precedence: Prefix length > AD > Metric." },
+                            { id: "t-3-1-2", title: "Floating Static Routes for Backup Links", details: "Set administrative distance higher than dynamic protocols for redundancy." }
                         ]
                     },
                     {
                         id: "mod-3-2",
-                        title: "3.2 Dynamic Routing: OSPF (Open Shortest Path First)",
-                        desc: "Link-State Routing, SPF Algorithm, LSA Types, Multi-Area Architecture, Designated Routers (DR/BDR).",
+                        title: "3.2 Single-Area & Multi-Area OSPFv2 / OSPFv3",
+                        desc: "Link-State Architecture, Router ID, Adjacency States, LSA Types (1,2,3,4,5), Area 0 Backbone.",
                         topics: [
-                            { id: "t-3-2-1", title: "OSPF Neighbor Adjacency States (Down -> Full)", details: "Master Init, 2-Way, ExStart, Exchange, Loading, and Full state conditions." },
-                            { id: "t-3-2-2", title: "Multi-Area OSPF & LSA Types (1, 2, 3)", details: "Design Area 0 Backbone and reduce routing table size with summarization." }
+                            { id: "t-3-2-1", title: "OSPF Neighbor Adjacency States (Init, 2-Way, ExStart, Exchange, Full)", details: "Troubleshoot common OSPF neighbor formation issues." },
+                            { id: "t-3-2-2", title: "OSPF LSA Types & Multi-Area Summarization", details: "Understand Router LSAs, Network LSAs, and Summary LSAs." }
                         ]
                     },
                     {
                         id: "mod-3-3",
-                        title: "3.3 Border Gateway Protocol (BGP) Essentials",
-                        desc: "eBGP vs iBGP, Autonomous System Numbers (ASN), Path Attributes (AS-Path, Next-Hop).",
+                        title: "3.3 Enterprise BGP (Border Gateway Protocol)",
+                        desc: "EGP Concepts, Path Vector Architecture, eBGP vs iBGP, BGP Path Attributes (WEIGHT, LOCAL_PREF, AS_PATH, MED).",
                         topics: [
-                            { id: "t-3-3-1", title: "eBGP Neighbor Relationships & Route Advertisement", details: "Connect enterprise edge routers to Internet Service Providers." }
+                            { id: "t-3-3-1", title: "eBGP Peerings & AS-Path Prepending", details: "Establish internet edge routing policies and outbound/inbound traffic engineering." },
+                            { id: "t-3-3-2", title: "BGP Best Path Selection Algorithm", details: "Memorize the decision matrix: Weight > LocalPref > Locally Originated > AS_PATH > Origin > MED." }
                         ]
                     }
                 ]
             },
             {
                 phaseId: "phase4",
-                phaseTitle: "Phase 4: Infrastructure Security & Services",
-                estHours: 30,
+                phaseTitle: "Phase 4: Enterprise Infrastructure & Security",
+                estHours: 35,
                 modules: [
                     {
                         id: "mod-4-1",
-                        title: "4.1 Access Control Lists (ACLs) & NAT/PAT",
-                        desc: "Standard vs Extended ACLs, Wildcard Masks, Static NAT, Dynamic NAT, Port Address Translation (PAT).",
+                        title: "4.1 Network Security & Access Control Lists (ACLs)",
+                        desc: "Standard vs Extended ACLs, Wildcard Masks, Port-Based Filtering, Stateful Inspection.",
                         topics: [
-                            { id: "t-4-1-1", title: "Extended ACL Construction & Directional Placement", details: "Filter traffic by source/destination IP and TCP/UDP port numbers." },
-                            { id: "t-4-1-2", title: "Overload NAT (PAT) & Session Tracking", details: "Allow hundreds of internal hosts to share a single public IP address." }
+                            { id: "t-4-1-1", title: "Extended ACL Syntax & Wildcard Mask Calculations", details: "Filter specific Layer 4 source/destination ports and IP networks." },
+                            { id: "t-4-1-2", title: "Dynamic ARP Inspection (DAI) & DHCP Snooping", details: "Mitigate Man-in-the-Middle attacks and rogue DHCP servers." }
                         ]
                     },
                     {
                         id: "mod-4-2",
-                        title: "4.2 Layer 2 Security Hardening",
-                        desc: "Port Security, DHCP Snooping, Dynamic ARP Inspection (DAI), BPDU Guard.",
+                        title: "4.2 VPNs & IPsec Encryption Mechanics",
+                        desc: "Site-to-Site IPsec VPNs, GRE Tunnels, IKEv1 vs IKEv2 (Phase 1 ISAKMP, Phase 2 IPsec SA), Diffie-Hellman Key Exchange.",
                         topics: [
-                            { id: "t-4-2-1", title: "DHCP Snooping & Dynamic ARP Inspection (DAI)", details: "Protect LANs from rogue DHCP servers and ARP poisoning attacks." }
+                            { id: "t-4-2-1", title: "IPsec Tunnel Setup & Encryption Algorithms (AES-256, SHA)", details: "Understand CIA triad implementation across public internet." }
                         ]
                     }
                 ]
             },
             {
                 phaseId: "phase5",
-                phaseTitle: "Phase 5: Advanced Enterprise Topics (CCNP Enterprise)",
-                estHours: 30,
+                phaseTitle: "Phase 5: Modern Network Automation & Wireless",
+                estHours: 25,
                 modules: [
                     {
                         id: "mod-5-1",
-                        title: "5.1 Modern Enterprise Architecture (SD-WAN & SD-Access)",
-                        desc: "Overlay vs Underlay Networks, Cisco Catalyst Center, SD-WAN vManage/vSmart/vEdge.",
+                        title: "5.1 Enterprise Wireless Architecture (WLC & APs)",
+                        desc: "Split-MAC Architecture, CAPWAP Tunnels, WLC Deployment, Wi-Fi 6 (802.11ax), Enterprise Security (802.1X / WPA3).",
                         topics: [
-                            { id: "t-5-1-1", title: "SD-WAN Fabric Architecture & Control Plane", details: "Decouple network control from physical underlying hardware." }
+                            { id: "t-5-1-1", title: "CAPWAP Tunneling & Lightweight AP Operations", details: "Centralize wireless control management and client traffic termination." }
                         ]
                     },
                     {
                         id: "mod-5-2",
-                        title: "5.2 Network Automation & Programmability",
-                        desc: "Python for Network Engineers, REST APIs, JSON Data Parsing, Ansible, NETCONF/RESTCONF.",
+                        title: "5.2 Network Automation, REST APIs & Python",
+                        desc: "JSON/YAML Data Formats, RESTconf, NETconf, Ansible Playbooks, Cisco DNA Center / Catalyst Center.",
                         topics: [
-                            { id: "t-5-2-1", title: "Python Netmiko/NAPALM Scripts & REST API Calls", details: "Automate VLAN creation and router backups across 100+ devices simultaneously." }
+                            { id: "t-5-2-1", title: "JSON Structure Parsing & Python Requests Library", details: "Automate router/switch configuration pulls using programmatic interfaces." }
                         ]
                     }
                 ]
             }
         ];
 
-        const STORAGE_KEY = "enterprise_net_roadmap_state_v3";
-        const broadcastChannel = new BroadcastChannel("net_roadmap_sync");
-
+        // State Management
         let userState = {
-            topicStatus: {},
-            bookmarks: {},
-            comments: {},
-            highlights: {},
-            quizScore: 0
+            statuses: {}, // topicId: 'not-started' | 'in-progress' | 'completed' | 'to-review'
+            bookmarks: {}, // topicId: boolean
+            notes: {} // topicId: string
         };
 
         let currentFilter = 'all';
-        let currentSearchQuery = '';
+        let searchQuery = '';
 
-        window.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            renderSidebar();
-            renderRoadmap();
-            updateMetrics();
-            calculateSubnet();
-            generateQuizQuestion();
-            renderAllNotesSummary();
-
-            // Real-time tab sync
-            broadcastChannel.onmessage = (event) => {
-                if (event.data && event.data.type === 'STATE_UPDATED') {
-                    userState = event.data.state;
-                    renderRoadmap();
-                    updateMetrics();
-                    renderAllNotesSummary();
-                }
-            };
-        });
-
-        function loadState() {
-            const saved = localStorage.getItem(STORAGE_KEY);
+        // Load & Save Local Storage
+        function loadSavedState() {
+            const saved = localStorage.getItem('net_engineer_hub_data');
             if (saved) {
-                try { userState = JSON.parse(saved); } catch(e){}
+                try {
+                    userState = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Failed to parse saved state:', e);
+                }
             }
+            // Ensure data structures exist
+            userState.statuses = userState.statuses || {};
+            userState.bookmarks = userState.bookmarks || {};
+            userState.notes = userState.notes || {};
         }
 
         function saveState() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
-            broadcastChannel.postMessage({ type: 'STATE_UPDATED', state: userState });
+            localStorage.setItem('net_engineer_hub_data', JSON.stringify(userState));
             updateMetrics();
-            renderAllNotesSummary();
+            showSyncBadge();
         }
 
+        function showSyncBadge() {
+            const badge = document.getElementById('syncBadge');
+            badge.classList.remove('hidden');
+            setTimeout(() => {
+                badge.classList.add('hidden');
+            }, 1500);
+        }
+
+        // Render Sidebar
         function renderSidebar() {
             const nav = document.getElementById('phaseSidebarNav');
-            nav.innerHTML = roadmapData.map((phase) => `
-                <a href="#${phase.phaseId}" class="flex items-center justify-between p-2 rounded hover:bg-slate-800 text-slate-300 hover:text-white transition group">
-                    <span class="truncate font-medium">${phase.phaseTitle.split(':')[0]}</span>
-                    <span id="sidebar-badge-${phase.phaseId}" class="text-[10px] font-mono bg-slate-800 group-hover:bg-cyan-500/20 text-cyan-400 px-1.5 py-0.5 rounded border border-slate-700">0%</span>
-                </a>
-            `).join('');
+            nav.innerHTML = '';
+            roadmapData.forEach((phase, idx) => {
+                const link = document.createElement('a');
+                link.href = `#${phase.phaseId}`;
+                link.className = "block px-3 py-2 rounded text-slate-300 hover:bg-slate-800 hover:text-cyan-400 font-mono transition truncate text-xs";
+                link.innerHTML = `<i class="fa-solid fa-layer-group text-slate-500 mr-2"></i> ${phase.phaseTitle.split(':')[0]}`;
+                nav.appendChild(link);
+            });
         }
 
+        // Render Master Roadmap
         function renderRoadmap() {
             const container = document.getElementById('roadmapContainer');
             container.innerHTML = '';
 
-            roadmapData.forEach(phase => {
-                const phaseEl = document.createElement('div');
-                phaseEl.id = phase.phaseId;
-                phaseEl.className = "space-y-4 scroll-mt-24";
+            roadmapData.forEach((phase) => {
+                const phaseCard = document.createElement('div');
+                phaseCard.id = phase.phaseId;
+                phaseCard.className = "bg-[#161b22] border border-[#30363d] rounded-xl overflow-hidden shadow-lg space-y-4 p-5";
 
-                let matchingModules = [];
+                let modulesHTML = '';
 
-                phase.modules.forEach(mod => {
-                    let matchingTopics = mod.topics.filter(topic => {
-                        const status = userState.topicStatus[topic.id] || 'pending';
-                        const isBookmarked = !!userState.bookmarks[topic.id];
+                phase.modules.forEach((mod) => {
+                    let topicsHTML = '';
+                    let visibleTopicsCount = 0;
 
-                        if (currentFilter === 'in-progress' && status !== 'in-progress') return false;
-                        if (currentFilter === 'completed' && status !== 'completed') return false;
-                        if (currentFilter === 'to-review' && status !== 'to-review') return false;
-                        if (currentFilter === 'bookmarked' && !isBookmarked) return false;
+                    mod.topics.forEach((top) => {
+                        const status = userState.statuses[top.id] || 'not-started';
+                        const isBookmarked = !!userState.bookmarks[top.id];
+                        const noteText = userState.notes[top.id] || '';
 
-                        if (currentSearchQuery) {
-                            const q = currentSearchQuery.toLowerCase();
-                            const matchTitle = topic.title.toLowerCase().includes(q);
-                            const matchDetails = topic.details.toLowerCase().includes(q);
-                            const matchMod = mod.title.toLowerCase().includes(q);
-                            if (!matchTitle && !matchDetails && !matchMod) return false;
+                        // Filter Matching
+                        let matchesFilter = false;
+                        if (currentFilter === 'all') matchesFilter = true;
+                        else if (currentFilter === 'in-progress' && status === 'in-progress') matchesFilter = true;
+                        else if (currentFilter === 'completed' && status === 'completed') matchesFilter = true;
+                        else if (currentFilter === 'to-review' && status === 'to-review') matchesFilter = true;
+                        else if (currentFilter === 'bookmarked' && isBookmarked) matchesFilter = true;
+
+                        // Search Matching
+                        let matchesSearch = true;
+                        if (searchQuery.trim() !== '') {
+                            const query = searchQuery.toLowerCase();
+                            const matchesText = top.title.toLowerCase().includes(query) || 
+                                                top.details.toLowerCase().includes(query) ||
+                                                mod.title.toLowerCase().includes(query) ||
+                                                noteText.toLowerCase().includes(query);
+                            matchesSearch = matchesText;
                         }
 
-                        return true;
+                        if (matchesFilter && matchesSearch) {
+                            visibleTopicsCount++;
+
+                            // Highlight text if searching
+                            let displayedTitle = top.title;
+                            if (searchQuery.trim() !== '') {
+                                const reg = new RegExp(`(${searchQuery})`, 'gi');
+                                displayedTitle = top.title.replace(reg, '<span class="text-highlight">$1</span>');
+                            }
+
+                            topicsHTML += `
+                                <div class="bg-[#0d1117] border border-[#30363d] p-3.5 rounded-lg space-y-2 text-xs font-mono">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <div class="flex items-start space-x-2.5 flex-1">
+                                            <button onclick="toggleBookmark('${top.id}')" class="text-slate-600 hover:text-purple-400 transition mt-0.5">
+                                                <i class="${isBookmarked ? 'fa-solid fa-bookmark text-purple-400' : 'fa-regular fa-bookmark'}"></i>
+                                            </button>
+                                            <div>
+                                                <h4 class="font-bold text-slate-200 text-sm leading-snug">${displayedTitle}</h4>
+                                                <p class="text-slate-400 font-sans mt-1 text-xs leading-relaxed">${top.details}</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Status Select -->
+                                        <select onchange="updateTopicStatus('${top.id}', this.value)" 
+                                            class="bg-[#161b22] border border-[#30363d] focus:border-cyan-500 text-xs px-2.5 py-1 rounded font-mono font-bold transition
+                                            ${status === 'completed' ? 'text-emerald-400 border-emerald-800/80 bg-emerald-950/40' : ''}
+                                            ${status === 'in-progress' ? 'text-cyan-400 border-cyan-800/80 bg-cyan-950/40' : ''}
+                                            ${status === 'to-review' ? 'text-amber-400 border-amber-800/80 bg-amber-950/40' : ''}
+                                            ${status === 'not-started' ? 'text-slate-400' : ''}">
+                                            <option value="not-started" ${status === 'not-started' ? 'selected' : ''}>⚪ Not Started</option>
+                                            <option value="in-progress" ${status === 'in-progress' ? 'selected' : ''}>🔄 In Progress</option>
+                                            <option value="completed" ${status === 'completed' ? 'selected' : ''}>✅ Completed</option>
+                                            <option value="to-review" ${status === 'to-review' ? 'selected' : ''}>📌 Needs Review</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Note Area -->
+                                    <div class="pt-2 border-t border-slate-800/60 flex items-center gap-2">
+                                        <i class="fa-solid fa-pen-to-square text-slate-500"></i>
+                                        <input type="text" placeholder="Add custom notes or CLI commands here..." 
+                                            value="${noteText.replace(/"/g, '&quot;')}"
+                                            onchange="updateTopicNote('${top.id}', this.value)"
+                                            class="w-full bg-[#161b22] border border-slate-800 focus:border-cyan-500 focus:outline-none px-2 py-1 text-xs text-cyan-300 rounded font-mono transition">
+                                    </div>
+                                </div>
+                            `;
+                        }
                     });
 
-                    if (matchingTopics.length > 0 || (!currentSearchQuery && currentFilter === 'all')) {
-                        matchingModules.push({ ...mod, filteredTopics: currentSearchQuery || currentFilter !== 'all' ? matchingTopics : mod.topics });
+                    if (visibleTopicsCount > 0) {
+                        modulesHTML += `
+                            <details open class="group bg-[#11161d] border border-[#30363d] rounded-lg overflow-hidden transition">
+                                <summary class="px-4 py-3 bg-[#161b22] cursor-pointer flex items-center justify-between font-mono text-sm text-cyan-400 font-bold hover:bg-slate-800/50 select-none">
+                                    <span>${mod.title}</span>
+                                    <span class="text-xs text-slate-400 font-normal font-sans group-open:rotate-180 transition-transform duration-200">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </span>
+                                </summary>
+                                <div class="p-4 space-y-3 bg-[#0d1117]/50">
+                                    <p class="text-xs text-slate-400 font-sans italic border-b border-slate-800 pb-2">${mod.desc}</p>
+                                    ${topicsHTML}
+                                </div>
+                            </details>
+                        `;
                     }
                 });
 
-                if (matchingModules.length === 0 && (currentFilter !== 'all' || currentSearchQuery)) {
-                    return;
-                }
-
-                phaseEl.innerHTML = `
-                    <div class="flex items-center justify-between border-b border-[#30363d] pb-2 pt-4">
-                        <div class="flex items-center space-x-3">
-                            <span class="h-3 w-3 rounded-full bg-cyan-400 inline-block"></span>
-                            <h2 class="text-base font-bold text-white font-mono">${phase.phaseTitle}</h2>
+                if (modulesHTML !== '') {
+                    phaseCard.innerHTML = `
+                        <div class="flex items-center justify-between border-b border-[#30363d] pb-3">
+                            <h3 class="text-base font-bold text-white font-mono flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-cyan-400"></i>
+                                ${phase.phaseTitle}
+                            </h3>
+                            <span class="text-xs font-mono text-amber-400 bg-amber-950/40 border border-amber-800/60 px-2.5 py-0.5 rounded-full">
+                                ~${phase.estHours} Hours
+                            </span>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">${phase.estHours} hrs estimated</span>
-                    </div>
-
-                    <div class="space-y-4">
-                        ${matchingModules.map(mod => renderModuleCard(mod)).join('')}
-                    </div>
-                `;
-
-                container.appendChild(phaseEl);
+                        <div class="space-y-3">
+                            ${modulesHTML}
+                        </div>
+                    `;
+                    container.appendChild(phaseCard);
+                }
             });
 
             if (container.children.length === 0) {
                 container.innerHTML = `
-                    <div class="p-12 text-center bg-[#161b22] border border-[#30363d] rounded-xl">
-                        <i class="fa-solid fa-filter-circle-xmark text-4xl text-slate-600 mb-3"></i>
-                        <p class="text-slate-400 font-mono text-sm">No topics match your active search or filter criteria.</p>
-                        <button onclick="setFilter('all'); document.getElementById('searchInput').value=''; handleSearch();" class="mt-3 text-xs text-cyan-400 hover:underline font-mono">Reset All Filters</button>
+                    <div class="p-12 text-center bg-[#161b22] border border-[#30363d] rounded-xl font-mono text-slate-400 space-y-3">
+                        <i class="fa-solid fa-filter-circle-xmark text-3xl text-cyan-500"></i>
+                        <p class="text-sm">No topics match your active search/filter criteria.</p>
+                        <button onclick="setFilter('all'); document.getElementById('searchInput').value=''; handleSearch();" class="px-4 py-1.5 bg-cyan-600 text-white text-xs rounded hover:bg-cyan-500 transition">Reset All Filters</button>
                     </div>
                 `;
             }
         }
 
-        function renderModuleCard(mod) {
-            const moduleComments = userState.comments[mod.id] || [];
+        // Metrics Calculator
+        function updateMetrics() {
+            let totalTopics = 0;
+            let completedTopics = 0;
+            let bookmarkedCount = 0;
+            let notesCount = 0;
 
-            return `
-                <div class="bg-[#161b22] border border-[#30363d] rounded-xl overflow-hidden shadow-lg transition" id="mod-card-${mod.id}">
-                    <div class="p-4 bg-[#1c2128] border-b border-[#30363d] flex items-center justify-between cursor-pointer" onclick="toggleModuleCollapse('${mod.id}')">
-                        <div>
-                            <h3 class="text-sm font-bold text-slate-100 font-mono flex items-center gap-2">
-                                <i class="fa-solid fa-folder-open text-cyan-400 text-xs"></i> ${mod.title}
-                            </h3>
-                            <p class="text-xs text-slate-400 mt-1">${mod.desc}</p>
-                        </div>
-                        <i id="arrow-${mod.id}" class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-200"></i>
-                    </div>
+            roadmapData.forEach(phase => {
+                phase.modules.forEach(mod => {
+                    mod.topics.forEach(top => {
+                        totalTopics++;
+                        const st = userState.statuses[top.id];
+                        if (st === 'completed') completedTopics++;
+                        if (userState.bookmarks[top.id]) bookmarkedCount++;
+                        if (userState.notes[top.id] && userState.notes[top.id].trim() !== '') notesCount++;
+                    });
+                });
+            });
 
-                    <div id="body-${mod.id}" class="p-4 space-y-4">
-                        <div class="space-y-3">
-                            ${mod.filteredTopics.map(topic => renderTopicRow(topic, mod.id)).join('')}
-                        </div>
+            const percent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
+            const completedHours = Math.round((completedTopics / (totalTopics || 1)) * 180);
 
-                        <!-- Real-time Notes / Log per Module -->
-                        <div class="mt-4 pt-4 border-t border-slate-800">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-xs font-mono text-slate-400 font-semibold"><i class="fa-solid fa-comments text-cyan-400"></i> Module Log & Notes (${moduleComments.length})</span>
-                            </div>
-                            
-                            <div class="space-y-2 mb-3">
-                                ${moduleComments.map((cmt, idx) => `
-                                    <div class="bg-[#0d1117] border border-slate-800 p-2.5 rounded text-xs font-mono text-slate-300 flex justify-between items-start">
-                                        <div>
-                                            <span class="text-[10px] text-cyan-500 block font-mono mb-1">[${cmt.timestamp}]</span>
-                                            <p class="whitespace-pre-wrap">${cmt.text}</p>
-                                        </div>
-                                        <button onclick="deleteComment('${mod.id}', ${idx})" class="text-slate-500 hover:text-red-400 ml-2"><i class="fa-solid fa-trash"></i></button>
-                                    </div>
-                                `).join('')}
-                            </div>
+            document.getElementById('overallPercent').innerText = `${percent}%`;
+            document.getElementById('overallCounts').innerText = `${completedTopics}/${totalTopics} Topics`;
+            document.getElementById('overallProgressBar').style.width = `${percent}%`;
 
-                            <div class="flex gap-2">
-                                <input type="text" id="input-comment-${mod.id}" placeholder="Add real-time study note or CLI snippet..." 
-                                    class="flex-1 bg-[#0d1117] border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200 font-mono focus:outline-none focus:border-cyan-500">
-                                <button onclick="addComment('${mod.id}')" class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded text-xs font-mono font-bold transition">Save Note</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            document.getElementById('hoursCompleted').innerText = `${completedHours} hrs`;
+            document.getElementById('bookmarkCount').innerText = bookmarkedCount;
+            document.getElementById('notesCount').innerText = notesCount;
+
+            // Render Notes View if Active
+            renderNotesSummaryView();
         }
 
-        function renderTopicRow(topic, modId) {
-            const status = userState.topicStatus[topic.id] || 'pending';
-            const isBookmarked = !!userState.bookmarks[topic.id];
-            const isHighlighted = !!userState.highlights[topic.id];
-
-            return `
-                <div class="p-3 bg-[#0d1117] border border-[#30363d] rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-slate-600 transition">
-                    <div class="flex items-start space-x-3 flex-1">
-                        <button onclick="toggleBookmark('${topic.id}')" title="Toggle Bookmark" class="mt-0.5 text-slate-600 hover:text-purple-400 transition">
-                            <i class="${isBookmarked ? 'fa-solid fa-bookmark text-purple-400' : 'fa-regular fa-bookmark'} text-sm"></i>
-                        </button>
-
-                        <button onclick="toggleHighlight('${topic.id}')" title="Highlight Text" class="mt-0.5 text-slate-600 hover:text-amber-400 transition">
-                            <i class="fa-solid fa-highlighter text-xs ${isHighlighted ? 'text-amber-400' : ''}"></i>
-                        </button>
-
-                        <div class="space-y-1 flex-1">
-                            <div class="text-xs font-bold font-mono text-slate-200 ${isHighlighted ? 'text-highlight' : ''}">
-                                ${topic.title}
-                            </div>
-                            <p class="text-xs text-slate-400 leading-relaxed">${topic.details}</p>
-                        </div>
-                    </div>
-
-                    <!-- Real-time Status Dropdown -->
-                    <div class="flex items-center space-x-2 self-end md:self-center">
-                        <select onchange="setTopicStatus('${topic.id}', this.value)" 
-                            class="bg-[#161b22] text-xs font-mono border border-[#30363d] rounded px-2.5 py-1 focus:outline-none focus:border-cyan-500 transition
-                            ${status === 'completed' ? 'text-emerald-400 border-emerald-500/40 bg-emerald-950/20 font-bold' : ''}
-                            ${status === 'in-progress' ? 'text-cyan-400 border-cyan-500/40 bg-cyan-950/20 font-bold' : ''}
-                            ${status === 'to-review' ? 'text-amber-400 border-amber-500/40 bg-amber-950/20 font-bold' : ''}
-                            ${status === 'pending' ? 'text-slate-400' : ''}">
-                            <option value="pending" ${status === 'pending' ? 'selected' : ''}>⏳ Pending</option>
-                            <option value="in-progress" ${status === 'in-progress' ? 'selected' : ''}>🔄 In Progress</option>
-                            <option value="completed" ${status === 'completed' ? 'selected' : ''}>✅ Completed</option>
-                            <option value="to-review" ${status === 'to-review' ? 'selected' : ''}>📌 Needs Review</option>
-                        </select>
-                    </div>
-                </div>
-            `;
-        }
-
-        function setTopicStatus(topicId, newStatus) {
-            userState.topicStatus[topicId] = newStatus;
+        // State Action Handlers
+        function updateTopicStatus(topicId, status) {
+            userState.statuses[topicId] = status;
             saveState();
             renderRoadmap();
         }
@@ -768,124 +795,9 @@
             renderRoadmap();
         }
 
-        function toggleHighlight(topicId) {
-            userState.highlights[topicId] = !userState.highlights[topicId];
+        function updateTopicNote(topicId, note) {
+            userState.notes[topicId] = note;
             saveState();
-            renderRoadmap();
-        }
-
-        function addComment(moduleId) {
-            const input = document.getElementById(`input-comment-${moduleId}`);
-            const text = input.value.trim();
-            if (!text) return;
-
-            if (!userState.comments[moduleId]) userState.comments[moduleId] = [];
-            const timestamp = new Date().toLocaleString();
-            userState.comments[moduleId].push({ text, timestamp });
-            input.value = '';
-            saveState();
-            renderRoadmap();
-        }
-
-        function deleteComment(moduleId, idx) {
-            if (userState.comments[moduleId]) {
-                userState.comments[moduleId].splice(idx, 1);
-                saveState();
-                renderRoadmap();
-            }
-        }
-
-        function updateMetrics() {
-            let totalTopics = 0;
-            let completedTopics = 0;
-            let bookmarkedCount = 0;
-
-            roadmapData.forEach(phase => {
-                let phaseTotal = 0;
-                let phaseCompleted = 0;
-
-                phase.modules.forEach(mod => {
-                    mod.topics.forEach(t => {
-                        totalTopics++;
-                        phaseTotal++;
-                        if (userState.topicStatus[t.id] === 'completed') {
-                            completedTopics++;
-                            phaseCompleted++;
-                        }
-                        if (userState.bookmarks[t.id]) bookmarkedCount++;
-                    });
-                });
-
-                const phasePct = phaseTotal > 0 ? Math.round((phaseCompleted / phaseTotal) * 100) : 0;
-                const badgeEl = document.getElementById(`sidebar-badge-${phase.phaseId}`);
-                if (badgeEl) badgeEl.innerText = `${phasePct}%`;
-            });
-
-            const overallPct = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
-            document.getElementById('overallPercent').innerText = `${overallPct}%`;
-            document.getElementById('overallCounts').innerText = `${completedTopics}/${totalTopics} Topics`;
-            document.getElementById('overallProgressBar').style.width = `${overallPct}%`;
-
-            const hoursDone = Math.round((completedTopics / (totalTopics || 1)) * 180);
-            document.getElementById('hoursCompleted').innerText = `${hoursDone} hrs`;
-            document.getElementById('bookmarkCount').innerText = bookmarkedCount;
-
-            let totalNotes = 0;
-            Object.values(userState.comments).forEach(arr => totalNotes += arr.length);
-            document.getElementById('notesCount').innerText = totalNotes;
-        }
-
-        function renderAllNotesSummary() {
-            const container = document.getElementById('allNotesContainer');
-            const summaryCount = document.getElementById('notesSummaryCount');
-            if (!container) return;
-
-            let allEntries = [];
-            roadmapData.forEach(p => {
-                p.modules.forEach(m => {
-                    const comments = userState.comments[m.id] || [];
-                    comments.forEach(c => {
-                        allEntries.push({ modTitle: m.title, ...c });
-                    });
-                });
-            });
-
-            summaryCount.innerText = `${allEntries.length} Notes Total`;
-
-            if (allEntries.length === 0) {
-                container.innerHTML = `
-                    <div class="p-8 text-center bg-[#0d1117] border border-slate-800 rounded-lg text-slate-500">
-                        No study notes added yet. Add notes directly under any module in the Roadmap view!
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = allEntries.map(e => `
-                <div class="bg-[#0d1117] border border-slate-800 p-4 rounded-lg space-y-1">
-                    <div class="flex justify-between items-center text-cyan-400 font-bold border-b border-slate-800 pb-1">
-                        <span>${e.modTitle}</span>
-                        <span class="text-[10px] text-slate-500 font-normal">${e.timestamp}</span>
-                    </div>
-                    <p class="text-slate-300 pt-2 whitespace-pre-wrap">${e.text}</p>
-                </div>
-            `).join('');
-        }
-
-        function switchView(viewId) {
-            document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('border-cyan-400', 'text-cyan-400', 'font-bold');
-                el.classList.add('border-transparent', 'text-slate-400');
-            });
-
-            const targetView = document.getElementById(`view-${viewId}`);
-            const targetTab = document.getElementById(`tab-${viewId}`);
-            if (targetView) targetView.classList.remove('hidden');
-            if (targetTab) {
-                targetTab.classList.remove('border-transparent', 'text-slate-400');
-                targetTab.classList.add('border-cyan-400', 'text-cyan-400', 'font-bold');
-            }
         }
 
         function setFilter(filterType) {
@@ -902,122 +814,109 @@
         }
 
         function handleSearch() {
-            currentSearchQuery = document.getElementById('searchInput').value.trim();
+            searchQuery = document.getElementById('searchInput').value;
             renderRoadmap();
         }
 
-        function toggleModuleCollapse(modId) {
-            const body = document.getElementById(`body-${modId}`);
-            const arrow = document.getElementById(`arrow-${modId}`);
-            if (body.classList.contains('hidden')) {
-                body.classList.remove('hidden');
-                arrow.classList.remove('-rotate-90');
-            } else {
-                body.classList.add('hidden');
-                arrow.classList.add('-rotate-90');
-            }
-        }
-
         function expandAllModules() {
-            roadmapData.forEach(p => p.modules.forEach(m => {
-                const b = document.getElementById(`body-${m.id}`);
-                const a = document.getElementById(`arrow-${m.id}`);
-                if (b && a) { b.classList.remove('hidden'); a.classList.remove('-rotate-90'); }
-            }));
+            document.querySelectorAll('details').forEach(el => el.open = true);
         }
 
         function collapseAllModules() {
-            roadmapData.forEach(p => p.modules.forEach(m => {
-                const b = document.getElementById(`body-${m.id}`);
-                const a = document.getElementById(`arrow-${m.id}`);
-                if (b && a) { b.classList.add('hidden'); a.classList.add('-rotate-90'); }
-            }));
+            document.querySelectorAll('details').forEach(el => el.open = false);
         }
 
+        // Switch View Tabs
+        function switchView(viewName) {
+            document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.className = "tab-btn px-4 py-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2";
+            });
+
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`tab-${viewName}`);
+            if (activeTab) {
+                activeTab.className = "tab-btn px-4 py-3 border-b-2 border-cyan-400 text-cyan-400 font-bold flex items-center gap-2";
+            }
+        }
+
+        // --- SUBNETTING CALCULATOR TOOL ---
         function calculateSubnet() {
             const ipStr = document.getElementById('calcIp').value.trim();
             const cidr = parseInt(document.getElementById('calcCidr').value);
 
             const parts = ipStr.split('.').map(Number);
             if (parts.length !== 4 || parts.some(p => isNaN(p) || p < 0 || p > 255)) {
-                return;
+                return; // Invalid IP format
             }
 
-            const hostBits = 32 - cidr;
-            const totalHosts = Math.pow(2, hostBits);
-            const usableHosts = cidr >= 31 ? 0 : totalHosts - 2;
-            const blockSize = Math.pow(2, 8 - (cidr % 8 === 0 ? 8 : cidr % 8));
-
-            // Mask calculation
+            const ipNum = (parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3];
             const maskNum = (0xFFFFFFFF << (32 - cidr)) >>> 0;
-            const maskStr = [
-                (maskNum >>> 24) & 255,
-                (maskNum >>> 16) & 255,
-                (maskNum >>> 8) & 255,
-                maskNum & 255
-            ].join('.');
-
-            // Network ID calculation
-            const ipNum = ((parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3]) >>> 0;
             const netNum = (ipNum & maskNum) >>> 0;
             const bcastNum = (netNum | (~maskNum >>> 0)) >>> 0;
 
-            const netStr = [(netNum >>> 24) & 255, (netNum >>> 16) & 255, (netNum >>> 8) & 255, netNum & 255].join('.');
-            const bcastStr = [(bcastNum >>> 24) & 255, (bcastNum >>> 16) & 255, (bcastNum >>> 8) & 255, bcastNum & 255].join('.');
+            const numToIp = (num) => [
+                (num >>> 24) & 255,
+                (num >>> 16) & 255,
+                (num >>> 8) & 255,
+                num & 255
+            ].join('.');
 
-            const firstHostStr = [(netNum >>> 24) & 255, (netNum >>> 16) & 255, (netNum >>> 8) & 255, (netNum & 255) + 1].join('.');
-            const lastHostStr = [(bcastNum >>> 24) & 255, (bcastNum >>> 16) & 255, (bcastNum >>> 8) & 255, (bcastNum & 255) - 1].join('.');
+            const totalHosts = Math.max(0, Math.pow(2, 32 - cidr) - 2);
+            const magicNum = Math.pow(2, 32 - cidr);
 
-            document.getElementById('resNetId').innerText = netStr;
-            document.getElementById('resMask').innerText = maskStr;
-            document.getElementById('resBcast').innerText = bcastStr;
-            document.getElementById('resRange').innerText = cidr >= 31 ? "N/A (P2P / Host Link)" : `${firstHostStr} - ${lastHostStr}`;
-            document.getElementById('resHosts').innerText = usableHosts;
-            document.getElementById('resMagic').innerText = blockSize;
+            document.getElementById('resNetId').innerText = numToIp(netNum);
+            document.getElementById('resMask').innerText = numToIp(maskNum);
+            document.getElementById('resBcast').innerText = numToIp(bcastNum);
+            document.getElementById('resRange').innerText = `${numToIp(netNum + 1)} - ${numToIp(bcastNum - 1)}`;
+            document.getElementById('resHosts').innerText = totalHosts;
+            document.getElementById('resMagic').innerText = magicNum > 256 ? `${magicNum / 256} Class C blocks` : magicNum;
         }
 
-        let currentQuizCorrectNet = "";
+        // --- SPEED SUBNETTING QUIZ ENGINE ---
+        let currentQuizAnswer = '';
+        let quizScoreCount = 0;
 
         function generateQuizQuestion() {
-            const octet1 = 10;
-            const octet2 = Math.floor(Math.random() * 200);
-            const octet3 = Math.floor(Math.random() * 200);
             const cidrs = [25, 26, 27, 28, 29, 30];
-            const cidr = cidrs[Math.floor(Math.random() * cidrs.length)];
+            const selectedCidr = cidrs[Math.floor(Math.random() * cidrs.length)];
+            const octet1 = 10;
+            const octet2 = Math.floor(Math.random() * 254);
+            const octet3 = Math.floor(Math.random() * 254);
+            const octet4 = Math.floor(Math.random() * 254);
 
-            const blockSize = Math.pow(2, 32 - cidr);
-            const subIndex = Math.floor(Math.random() * (256 / blockSize));
-            const netOctet4 = subIndex * blockSize;
-            const hostOctet4 = netOctet4 + Math.floor(Math.random() * (blockSize - 1));
+            const ipStr = `${octet1}.${octet2}.${octet3}.${octet4}`;
+            
+            // Calculate Correct Network ID
+            const blockSize = Math.pow(2, 32 - selectedCidr);
+            const netOctet4 = Math.floor(octet4 / blockSize) * blockSize;
+            currentQuizAnswer = `${octet1}.${octet2}.${octet3}.${netOctet4}`;
 
-            const testIp = `${octet1}.${octet2}.${octet3}.${hostOctet4}`;
-            currentQuizCorrectNet = `${octet1}.${octet2}.${octet3}.${netOctet4}`;
-
-            document.getElementById('quizQuestion').innerText = `What is the Network ID for host address ${testIp} /${cidr}?`;
+            document.getElementById('quizQuestion').innerText = `What is the Network ID for host ${ipStr} /${selectedCidr}?`;
             document.getElementById('quizAnswer').value = '';
-            const fb = document.getElementById('quizFeedback');
-            fb.classList.add('hidden');
+            const feedback = document.getElementById('quizFeedback');
+            feedback.classList.add('hidden');
         }
 
         function submitQuizAnswer() {
             const userAns = document.getElementById('quizAnswer').value.trim();
-            const fb = document.getElementById('quizFeedback');
-            fb.classList.remove('hidden');
+            const feedback = document.getElementById('quizFeedback');
+            feedback.classList.remove('hidden');
 
-            if (userAns === currentQuizCorrectNet) {
-                fb.className = "p-3 rounded text-xs font-mono bg-emerald-950 text-emerald-400 border border-emerald-800";
-                fb.innerText = " Correct! Excellent mental subnetting execution.";
-                userState.quizScore = (userState.quizScore || 0) + 1;
-                document.getElementById('quizScore').innerText = `Score: ${userState.quizScore} Correct`;
-                saveState();
+            if (userAns === currentQuizAnswer) {
+                quizScoreCount++;
+                feedback.className = "p-3 rounded text-xs font-mono bg-emerald-950 border border-emerald-800 text-emerald-400";
+                feedback.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Correct! Excellent speed subnetting work.`;
             } else {
-                fb.className = "p-3 rounded text-xs font-mono bg-red-950 text-red-400 border border-red-800";
-                fb.innerText = ` Incorrect. The correct Network ID is ${currentQuizCorrectNet}`;
+                feedback.className = "p-3 rounded text-xs font-mono bg-red-950 border border-red-800 text-red-400";
+                feedback.innerHTML = `<i class="fa-solid fa-xmark mr-2"></i> Incorrect. The correct Network ID is <strong>${currentQuizAnswer}</strong>.`;
             }
+            document.getElementById('quizScore').innerText = `Score: ${quizScoreCount} Correct`;
         }
 
-        let cliMode = 'EXEC'; // 'EXEC' | 'PRIV' | 'CONFIG' | 'INT'
-        let currentInterface = '';
+        // --- CISCO CLI SIMULATOR ---
+        let cliMode = 'user'; // 'user' | 'priv' | 'config'
+        let hostname = 'Switch';
 
         function handleCliKeyDown(e) {
             if (e.key === 'Enter') {
@@ -1026,127 +925,177 @@
         }
 
         function processCliCommand() {
-            const input = document.getElementById('cliInput');
-            const cmd = input.value.trim();
-            if (!cmd) return;
+            const inputEl = document.getElementById('cliInput');
+            const cmd = inputEl.value.trim();
+            if (cmd === '') return;
 
-            const term = document.getElementById('terminalScreen');
-            const prompt = document.getElementById('cliPrompt').innerText;
-
+            const screen = document.getElementById('terminalScreen');
+            const promptSymbol = cliMode === 'user' ? '>' : (cliMode === 'priv' ? '#' : '(config)#');
+            
             // Echo command
-            term.innerHTML += `<div><span class="text-cyan-400 font-bold">${prompt}</span> <span class="text-white">${cmd}</span></div>`;
-            input.value = '';
+            const cmdEcho = document.createElement('p');
+            cmdEcho.className = "text-white font-bold";
+            cmdEcho.innerText = `${hostname}${promptSymbol} ${cmd}`;
+            screen.appendChild(cmdEcho);
 
+            // Execute logic
             const lower = cmd.toLowerCase();
+            let output = '';
 
-            if (lower === 'help' || lower === '?') {
-                term.innerHTML += `<div class="text-slate-300">
-Available commands in this simulator:
- - enable / exit / end
- - configure terminal
- - interface gigabitethernet0/0
- - ip address [ip] [mask]
- - vlan [id]
- - show ip interface brief
- - show ip route
- - show vlan brief
- - ping [ip]
-</div>`;
-            } else if (lower === 'enable') {
-                cliMode = 'PRIV';
-                document.getElementById('cliPrompt').innerText = 'Switch#';
+            if (lower === 'enable' || lower === 'en') {
+                cliMode = 'priv';
+                document.getElementById('cliPrompt').innerText = `${hostname}#`;
+            } else if (lower === 'disable') {
+                cliMode = 'user';
+                document.getElementById('cliPrompt').innerText = `${hostname}>`;
             } else if (lower === 'configure terminal' || lower === 'conf t') {
-                if (cliMode === 'EXEC') {
-                    term.innerHTML += `<div class="text-red-400">% Command invalid in user EXEC mode. Type 'enable' first.</div>`;
+                if (cliMode === 'priv') {
+                    cliMode = 'config';
+                    document.getElementById('cliPrompt').innerText = `${hostname}(config)#`;
+                    output = "Enter configuration commands, one per line. End with CNTL/Z.";
                 } else {
-                    cliMode = 'CONFIG';
-                    document.getElementById('cliPrompt').innerText = 'Switch(config)#';
-                }
-            } else if (lower.startsWith('interface') || lower.startsWith('int ')) {
-                if (cliMode === 'CONFIG') {
-                    cliMode = 'INT';
-                    currentInterface = cmd.split(' ')[1] || 'g0/0';
-                    document.getElementById('cliPrompt').innerText = `Switch(config-if)#`;
-                } else {
-                    term.innerHTML += `<div class="text-red-400">% Enter configuration commands with 'configure terminal' first.</div>`;
+                    output = "% Command allowed in privileged mode only.";
                 }
             } else if (lower === 'exit') {
-                if (cliMode === 'INT') { cliMode = 'CONFIG'; document.getElementById('cliPrompt').innerText = 'Switch(config)#'; }
-                else if (cliMode === 'CONFIG') { cliMode = 'PRIV'; document.getElementById('cliPrompt').innerText = 'Switch#'; }
-                else if (cliMode === 'PRIV') { cliMode = 'EXEC'; document.getElementById('cliPrompt').innerText = 'Switch>'; }
+                if (cliMode === 'config') {
+                    cliMode = 'priv';
+                    document.getElementById('cliPrompt').innerText = `${hostname}#`;
+                } else if (cliMode === 'priv') {
+                    cliMode = 'user';
+                    document.getElementById('cliPrompt').innerText = `${hostname}>`;
+                }
+            } else if (lower.startsWith('hostname ')) {
+                if (cliMode === 'config') {
+                    hostname = cmd.split(' ')[1] || 'Switch';
+                    document.getElementById('cliPrompt').innerText = `${hostname}(config)#`;
+                } else {
+                    output = "% Command allowed in configuration mode only.";
+                }
             } else if (lower === 'show ip interface brief' || lower === 'sh ip int br') {
-                term.innerHTML += `<div class="text-slate-300">
-Interface              IP-Address      OK? Method Status                Protocol
-GigabitEthernet0/0     192.168.1.1     YES manual up                    up      
-GigabitEthernet0/1     unassigned      YES unset  up                    up      
-Vlan1                  10.1.1.254      YES manual up                    up      
-</div>`;
+                output = `Interface              IP-Address      OK? Method Status                Protocol\n` +
+                         `GigabitEthernet1/0/1   192.168.1.1     YES manual up                    up      \n` +
+                         `GigabitEthernet1/0/2   unassigned      YES unset  down                  down    \n` +
+                         `Vlan1                  10.1.1.254      YES manual up                    up      `;
             } else if (lower === 'show ip route' || lower === 'sh ip ro') {
-                term.innerHTML += `<div class="text-slate-300">
-Codes: C - connected, S - static, O - OSPF, B - BGP
-
-Gateway of last resort is 192.168.1.254 to network 0.0.0.0
-
-S*    0.0.0.0/0 [1/0] via 192.168.1.254
-C     192.168.1.0/24 is directly connected, GigabitEthernet0/0
-O     10.1.0.0/16 [110/20] via 192.168.1.2, 01:42:10, GigabitEthernet0/0
-</div>`;
-            } else if (lower.startsWith('ping')) {
-                term.innerHTML += `<div class="text-slate-300">
-Type escape sequence to abort.
-Sending 5, 100-byte ICMP Echos to ${cmd.split(' ')[1] || '8.8.8.8'}, timeout is 2 seconds:
-!!!!!
-Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/4 ms
-</div>`;
+                output = `Codes: C - connected, S - static, O - OSPF, B - BGP\n\n` +
+                         `Gateway of last resort is 10.0.0.1 to network 0.0.0.0\n\n` +
+                         `S*    0.0.0.0/0 [1/0] via 10.0.0.1\n` +
+                         `C     192.168.1.0/24 is directly connected, GigabitEthernet1/0/1\n` +
+                         `O     172.16.0.0/16 [110/20] via 10.0.0.2, 00:14:22, GigabitEthernet1/0/1`;
+            } else if (lower === 'help' || lower === '?') {
+                output = "Available commands: enable, disable, configure terminal, hostname <name>, show ip interface brief, show ip route, exit, clear";
+            } else if (lower === 'clear') {
+                screen.innerHTML = '';
+                inputEl.value = '';
+                return;
             } else {
-                term.innerHTML += `<div class="text-slate-400">% Executed '${cmd}' successfully in simulator.</div>`;
+                output = `% Invalid command or syntax error at '^' marker.`;
             }
 
-            term.scrollTop = term.scrollHeight;
+            if (output) {
+                const outEl = document.createElement('pre');
+                outEl.className = "text-emerald-400 font-mono whitespace-pre-wrap";
+                outEl.innerText = output;
+                screen.appendChild(outEl);
+            }
+
+            inputEl.value = '';
+            screen.scrollTop = screen.scrollHeight;
         }
 
+        // --- NOTES SUMMARY VIEW ---
+        function renderNotesSummaryView() {
+            const container = document.getElementById('allNotesContainer');
+            container.innerHTML = '';
+            let count = 0;
+
+            roadmapData.forEach(phase => {
+                phase.modules.forEach(mod => {
+                    mod.topics.forEach(top => {
+                        const note = userState.notes[top.id];
+                        if (note && note.trim() !== '') {
+                            count++;
+                            const noteCard = document.createElement('div');
+                            noteCard.className = "bg-[#0d1117] border border-[#30363d] p-4 rounded-lg space-y-2";
+                            noteCard.innerHTML = `
+                                <div class="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-1.5">
+                                    <span class="font-bold text-cyan-400 text-xs">${top.title}</span>
+                                    <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-300">${phase.phaseTitle.split(':')[0]}</span>
+                                </div>
+                                <p class="text-white text-xs whitespace-pre-wrap font-mono mt-2">${note}</p>
+                            `;
+                            container.appendChild(noteCard);
+                        }
+                    });
+                });
+            });
+
+            document.getElementById('notesSummaryCount').innerText = `${count} Saved Notes`;
+
+            if (count === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center text-slate-500 font-mono italic">
+                        No custom notes added yet. Add notes to topics in the Master Roadmap view to see them here!
+                    </div>
+                `;
+            }
+        }
+
+        // --- EXPORT & IMPORT DATA ---
         function exportData() {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userState, null, 2));
-            const anchor = document.createElement('a');
-            anchor.setAttribute("href", dataStr);
-            anchor.setAttribute("download", `CCNA_CCNP_Realtime_Progress_${new Date().toISOString().slice(0,10)}.json`);
-            document.body.appendChild(anchor);
-            anchor.click();
-            anchor.remove();
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `networking_roadmap_backup_${new Date().toISOString().slice(0,10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
         }
 
         function triggerImport() {
             document.getElementById('importFileInput').click();
         }
 
-        function importData(event) {
-            const file = event.target.files[0];
+        function importData(e) {
+            const file = e.target.files[0];
             if (!file) return;
 
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function(evt) {
                 try {
-                    const parsed = JSON.parse(e.target.result);
-                    if (parsed && typeof parsed === 'object') {
-                        userState = parsed;
+                    const imported = JSON.parse(evt.target.result);
+                    if (imported && (imported.statuses || imported.bookmarks || imported.notes)) {
+                        userState = imported;
                         saveState();
                         renderRoadmap();
                         alert('Progress backup imported successfully!');
+                    } else {
+                        alert('Invalid backup JSON format.');
                     }
-                } catch(err) {
-                    alert('Invalid JSON file format.');
+                } catch (err) {
+                    alert('Error reading JSON file.');
                 }
             };
             reader.readAsText(file);
         }
 
         function resetProgress() {
-            if (confirm("Reset all progress, notes, and quiz scores?")) {
-                userState = { topicStatus: {}, bookmarks: {}, comments: {}, highlights: {}, quizScore: 0 };
+            if (confirm('Are you sure you want to reset all saved progress, bookmarks, and notes?')) {
+                userState = { statuses: {}, bookmarks: {}, notes: {} };
                 saveState();
                 renderRoadmap();
             }
         }
+
+        // Initial App Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedState();
+            renderSidebar();
+            renderRoadmap();
+            updateMetrics();
+            calculateSubnet();
+            generateQuizQuestion();
+        });
     </script>
 </body>
 </html>
